@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddActivity">
+
+    <TextView
+        android:id="@+id/addTitle"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/add_title"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/addTitle" />
+
+    <Button
+        android:id="@+id/btnFinish"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/finish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/addTitle" />
+
+    <View
+        android:id="@+id/topLine"
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:background="@android:color/background_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addTitle" />
+
+    <ImageView
+        android:id="@+id/imageDollar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topLine"
+        app:srcCompat="@drawable/dollar" />
+
+    <View
+        android:id="@+id/midLine"
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/background_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageDollar" />
+
+    <EditText
+        android:id="@+id/txtMoney"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topLine" />
+
+    <TextView
+        android:id="@+id/txtMoneySign"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:text="+"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toStartOf="@+id/txtMoney"
+        app:layout_constraintTop_toBottomOf="@+id/topLine" />
+
+    <View
+        android:id="@+id/switchView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/title_colour"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnIncome"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:background="@drawable/design_image_background"
+        android:text="@string/incomes"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnOutgoing"
+        app:layout_constraintStart_toStartOf="@+id/switchView"
+        app:layout_constraintTop_toTopOf="@id/switchView" />
+
+    <Button
+        android:id="@+id/btnOutgoing"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:background="@drawable/design_image_background"
+        android:text="@string/outgoings"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnIncome"
+        app:layout_constraintTop_toTopOf="@+id/switchView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyViewIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/midLine" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyViewOutgoing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/midLine" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,4 +3,6 @@
     <string name="list_title">List</string>
     <string name="add_title">Add</string>
     <string name="overview_title">Overview</string>
+    <string name="incomes">Incomes</string>
+    <string name="outgoings">Outgoings</string>
 </resources>
