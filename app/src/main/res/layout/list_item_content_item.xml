@@ -24,9 +24,8 @@
         android:layout_marginStart="17dp"
         android:layout_marginLeft="17dp"
         android:layout_marginTop="20dp"
-        android:text="Salary"
-        android:textSize="32sp"
         android:gravity="center"
+        android:textSize="32sp"
         app:layout_constraintStart_toEndOf="@+id/entry_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,9 +36,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:text="+$600.0"
-        android:textSize="32sp"
         android:gravity="center"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
