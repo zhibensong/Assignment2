@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/listTitle"
+        android:id="@+id/txtListTitle"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
@@ -21,12 +21,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyViewList"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/txtListTitle"
+        app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/buttonLine"
@@ -35,6 +37,15 @@
         android:layout_marginBottom="128dp"
         android:background="@android:color/background_dark"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/topLine"
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:layout_marginBottom="128dp"
+        android:background="@android:color/background_dark"
+        app:layout_constraintTop_toBottomOf="@id/txtListTitle"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -67,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonLine" />
 
     <TextView
-        android:id="@+id/textListBtn"
+        android:id="@+id/txtListBtn"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="@string/list_title"
@@ -78,7 +89,7 @@
         app:layout_constraintVertical_bias="0.512" />
 
     <TextView
-        android:id="@+id/textAddBtn"
+        android:id="@+id/txtAddBtn"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="@string/add_title"
@@ -89,7 +100,7 @@
         app:layout_constraintVertical_bias="0.512" />
 
     <TextView
-        android:id="@+id/textOverviewBtn"
+        android:id="@+id/txtOverviewBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/overview_title"

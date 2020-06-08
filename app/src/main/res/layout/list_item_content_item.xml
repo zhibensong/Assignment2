@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/entry_icon"
+        android:id="@+id/imageEntry"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginStart="20dp"
@@ -18,7 +17,7 @@
         app:srcCompat="@drawable/design_image_background" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtType"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginStart="17dp"
@@ -26,11 +25,11 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:textSize="32sp"
-        app:layout_constraintStart_toEndOf="@+id/entry_icon"
+        app:layout_constraintStart_toEndOf="@+id/imageEntry"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtNumber"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginTop="20dp"

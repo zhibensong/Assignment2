@@ -92,7 +92,7 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonLine" />
 
     <TextView
-        android:id="@+id/textListBtn"
+        android:id="@+id/txtListBtn"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="@string/list_title"
@@ -103,7 +103,7 @@
         app:layout_constraintVertical_bias="0.512" />
 
     <TextView
-        android:id="@+id/textAddBtn"
+        android:id="@+id/txtAddBtn"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="@string/add_title"
@@ -114,7 +114,7 @@
         app:layout_constraintVertical_bias="0.512" />
 
     <TextView
-        android:id="@+id/textOverviewBtn"
+        android:id="@+id/txtOverviewBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/overview_title"
