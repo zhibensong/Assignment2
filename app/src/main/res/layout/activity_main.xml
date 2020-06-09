@@ -49,32 +49,32 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnList"
+        android:id="@+id/btnListList"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/list_clicked"
-        app:layout_constraintEnd_toEndOf="@id/btnAdd"
-        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
+        app:layout_constraintEnd_toEndOf="@id/btnAddList"
+        app:layout_constraintEnd_toStartOf="@+id/btnAddList"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLine" />
 
     <Button
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnAddList"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/add"
-        app:layout_constraintEnd_toStartOf="@+id/btnOverview"
-        app:layout_constraintStart_toEndOf="@+id/btnList"
+        app:layout_constraintEnd_toStartOf="@+id/btnOverviewList"
+        app:layout_constraintStart_toEndOf="@+id/btnListList"
         app:layout_constraintTop_toBottomOf="@+id/buttonLine" />
 
     <Button
-        android:id="@+id/btnOverview"
+        android:id="@+id/btnOverviewList"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/overview_default"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnAdd"
+        app:layout_constraintStart_toEndOf="@+id/btnAddList"
         app:layout_constraintTop_toBottomOf="@+id/buttonLine" />
 
     <TextView
@@ -84,8 +84,8 @@
         android:text="@string/list_title"
         android:textSize="30sp"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="@+id/btnList"
-        app:layout_constraintTop_toBottomOf="@+id/btnList"
+        app:layout_constraintStart_toStartOf="@+id/btnListList"
+        app:layout_constraintTop_toBottomOf="@+id/btnListList"
         app:layout_constraintVertical_bias="0.512" />
 
     <TextView
@@ -95,8 +95,8 @@
         android:text="@string/add_title"
         android:textSize="30sp"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="@+id/btnAdd"
-        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
+        app:layout_constraintStart_toStartOf="@+id/btnAddList"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddList"
         app:layout_constraintVertical_bias="0.512" />
 
     <TextView
@@ -106,7 +106,7 @@
         android:text="@string/overview_title"
         android:textSize="30sp"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="@+id/btnOverview"
-        app:layout_constraintTop_toBottomOf="@+id/btnOverview"
+        app:layout_constraintStart_toStartOf="@+id/btnOverviewList"
+        app:layout_constraintTop_toBottomOf="@+id/btnOverviewList"
         app:layout_constraintVertical_bias="0.512" />
 </androidx.constraintlayout.widget.ConstraintLayout>
