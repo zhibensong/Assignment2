@@ -16,14 +16,16 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<dayNetIncome> dayList = new ArrayList<dayNetIncome>();
-    List<Date> dateList = new ArrayList<Date>();
-    List<Double> totalList = new ArrayList<Double>();
-    List<entry> firstDay = new ArrayList<entry>();
-    List<entry> secondDay = new ArrayList<entry>();
-    List<List<entry>> entryListList = new ArrayList<List<entry>>();
+    List<dayNetIncome> dayList = new ArrayList<>();
+    List<Date> dateList = new ArrayList<>();
+    List<Double> totalList = new ArrayList<>();
+    List<entry> firstDay = new ArrayList<>();
+    List<entry> secondDay = new ArrayList<>();
+    List<List<entry>> entryListList = new ArrayList<>();
     RecyclerView recyViewList;
     Button btnAdd;
+    Button btnOver;
+    Button btnList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +35,16 @@ public class MainActivity extends AppCompatActivity {
         //Find component
         recyViewList = findViewById(R.id.recyViewList);
         btnAdd = findViewById(R.id.btnAddList);
+        btnOver = findViewById(R.id.btnOverviewList);
+        btnList = findViewById(R.id.btnListList);
 
         //Data Part
         dateList.add(new Date());
         dateList.add(new Date(1591620407));
-        entry fe = new entry(R.drawable.add, "Salary", 800.0);
-        entry se = new entry(R.drawable.cancel, "Food", -60.0);
-        entry te = new entry(R.drawable.add, "Salary", 800.0);
-        entry foe = new entry(R.drawable.cancel, "Movie", -100.0);
+        entry fe = new entry(R.drawable.salary, "Salary", 800.0);
+        entry se = new entry(R.drawable.eating, "Eating out", -60.0);
+        entry te = new entry(R.drawable.salary, "Salary", 800.0);
+        entry foe = new entry(R.drawable.education, "Education", -100.0);
         firstDay.add(fe);
         firstDay.add(se);
         secondDay.add(te);
@@ -60,12 +64,20 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyViewList.setLayoutManager(layoutManager);
 
-        //Start add activity
+        //Button click
+        btnList.setEnabled(false);
         final Intent addIntent = new Intent(this, AddActivity.class);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(addIntent);
+            }
+        });
+        final Intent overIntent = new Intent(this, OverviewActivity.class);
+        btnOver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(overIntent);
             }
         });
     }

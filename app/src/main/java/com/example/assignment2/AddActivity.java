@@ -26,8 +26,6 @@ public class AddActivity extends AppCompatActivity {
     TextView txtMoneySign;
     Button btnIncome;
     Button btnOutgoing;
-    int selectedIncome = 0;
-    int selectedOutgoing = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,20 +48,20 @@ public class AddActivity extends AppCompatActivity {
         }
 
         //Fill recycler view
-        expenseTypeAdapter incomeAdapter = new expenseTypeAdapter(incomeList, AddActivity.this);
-        expenseTypeAdapter outgoingAdapter = new expenseTypeAdapter(outgoingList, AddActivity.this);
+        final expenseTypeAdapter incomeAdapter = new expenseTypeAdapter(incomeList, AddActivity.this);
+        final expenseTypeAdapter outgoingAdapter = new expenseTypeAdapter(outgoingList, AddActivity.this);
         incomeAdapter.setOnItemClickListener(new expenseTypeAdapter.OnItemClickListener() {
             @Override
             public void onClick(int pos) {
-                changeColor(recyViewIncome, selectedIncome, pos);
-                selectedIncome = pos;
+                incomeAdapter.setPosition(pos);
+                incomeAdapter.notifyDataSetChanged();
             }
         });
         outgoingAdapter.setOnItemClickListener(new expenseTypeAdapter.OnItemClickListener() {
             @Override
             public void onClick(int pos) {
-                changeColor(recyViewOutgoing, selectedOutgoing, pos);
-                selectedOutgoing = pos;
+                outgoingAdapter.setPosition(pos);
+                outgoingAdapter.notifyDataSetChanged();
             }
         });
         GridLayoutManager incomeLayout = new GridLayoutManager(this, 2);
@@ -90,10 +88,5 @@ public class AddActivity extends AppCompatActivity {
                 recyViewOutgoing.setVisibility(View.INVISIBLE);
             }
         });
-    }
-
-    public void changeColor(RecyclerView re, int prePos, int nowPos){
-        re.getLayoutManager().findViewByPosition(prePos).setBackgroundColor(Color.parseColor("#fafafa"));
-        re.getLayoutManager().findViewByPosition(nowPos).setBackgroundColor(Color.parseColor("#fefaaa"));
     }
 }
