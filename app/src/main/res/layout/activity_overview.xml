@@ -30,7 +30,7 @@
     <lecho.lib.hellocharts.view.LineChartView
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
-        android:layout_height="19dp"
+        android:layout_height="250dp"
         app:layout_constraintBottom_toTopOf="@+id/midLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topLine">
@@ -53,13 +53,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/midLine" />
+        app:layout_constraintTop_toBottomOf="@+id/midLine"
+        app:layout_constraintVertical_bias="1.0" />
 
     <View
         android:id="@+id/buttonLine"
         android:layout_width="fill_parent"
         android:layout_height="3dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="90dp"
         android:background="@android:color/background_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -92,38 +93,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnAddOver"
         app:layout_constraintTop_toBottomOf="@+id/buttonLine" />
-
-    <TextView
-        android:id="@+id/txtListBtn"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="@string/list_title"
-        android:textSize="30sp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="@+id/btnListOver"
-        app:layout_constraintTop_toBottomOf="@+id/btnListOver"
-        app:layout_constraintVertical_bias="0.512" />
-
-    <TextView
-        android:id="@+id/txtAddBtn"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="@string/add_title"
-        android:textSize="30sp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="@+id/btnAddOver"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddOver"
-        app:layout_constraintVertical_bias="0.512" />
-
-    <TextView
-        android:id="@+id/txtOverviewBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/overview_title"
-        android:textSize="30sp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="@+id/btnOverviewOver"
-        app:layout_constraintTop_toBottomOf="@+id/btnOverviewOver"
-        app:layout_constraintVertical_bias="0.512" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
