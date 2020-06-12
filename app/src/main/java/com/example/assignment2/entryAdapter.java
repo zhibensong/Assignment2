@@ -50,7 +50,12 @@ public class entryAdapter extends RecyclerView.Adapter<entryAdapter.entryViewHol
     public void onBindViewHolder(@NonNull entryViewHolder holder, int position) {
         holder.imageEntry.setImageResource(entryList.get(position).getImage());
         holder.txtType.setText(entryList.get(position).getTypeName());
-        holder.txtNumber.setText(entryList.get(position).getNumber() + "");
+        if(entryList.get(position).getIO() == 0){
+            holder.txtNumber.setText("+" + entryList.get(position).getNumber() + "");
+        }else{
+            holder.txtNumber.setText("-" + entryList.get(position).getNumber() + "");
+        }
+
     }
 
     @Override

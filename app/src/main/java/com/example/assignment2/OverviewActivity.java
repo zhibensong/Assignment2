@@ -35,7 +35,7 @@ public class OverviewActivity extends AppCompatActivity {
     String[] monthName = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Auc", "Sep", "Oct", "Nov", "Dec"};
     int year = cal.get(Calendar.YEAR);
     int month = cal.get(Calendar.MONTH) + 1;
-    int day;
+    int day = cal.getActualMaximum(Calendar.MONTH);
     int[] amount;
     String[] label;
     List<PointValue> pointValues = new ArrayList<>();
@@ -125,7 +125,6 @@ public class OverviewActivity extends AppCompatActivity {
 
     //Set line chart data
     public void setData(){
-        day = getMonthDay(year, month);
         amount = new int[day];
         label = new String[day];
         for(int i = 0; i < day; i++){

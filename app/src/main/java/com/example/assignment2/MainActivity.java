@@ -7,15 +7,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    Calendar cal = Calendar.getInstance();
     List<dayNetIncome> dayList = new ArrayList<>();
     List<Date> dateList = new ArrayList<>();
     List<Double> totalList = new ArrayList<>();
@@ -26,11 +29,16 @@ public class MainActivity extends AppCompatActivity {
     Button btnAdd;
     Button btnOver;
     Button btnList;
+    DBManager dbManager = new DBManager(this);
+    int year = cal.get(Calendar.YEAR);
+    int month = cal.get(Calendar.MONTH);
+    int day = cal.get(Calendar.DAY_OF_MONTH);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        System.out.println(dbManager.queryByDay(year, month, 13));
 
         //Find component
         recyViewList = findViewById(R.id.recyViewList);
@@ -51,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         secondDay.add(foe);
         entryListList.add(firstDay);
         entryListList.add(secondDay);
+        entryListList.add(dbManager.queryByDay(year, month, day));
         totalList.add(fe.getNumber() + se.getNumber());
         totalList.add(te.getNumber() + foe.getNumber());
         for(int i = 0; i < dateList.size(); i++){

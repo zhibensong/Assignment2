@@ -5,4 +5,5 @@
     <string name="overview_title">Overview</string>
     <string name="incomes">Incomes</string>
     <string name="outgoings">Outgoings</string>
+    <string name="dbname">assignment2.db</string>
 </resources>

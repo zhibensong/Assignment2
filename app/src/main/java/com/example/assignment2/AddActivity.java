@@ -6,15 +6,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class AddActivity extends AppCompatActivity {
 
+    Calendar cal = Calendar.getInstance();
     Integer[] incomeImageList = {R.drawable.salary, R.drawable.investment, R.drawable.parttime, R.drawable.borrow, R.drawable.selling, R.drawable.gift, R.drawable.other};
     String[] incomeNameList = {"Salary", "Investment income", "Internship", "Borrow", "Selling", "Gift", "Other"};
     List<expenseType> incomeList = new ArrayList<expenseType>();
@@ -26,6 +31,15 @@ public class AddActivity extends AppCompatActivity {
     TextView txtMoneySign;
     Button btnIncome;
     Button btnOutgoing;
+    Button btnFinish;
+    Button btnCancel;
+    EditText txtMoney;
+    int selectedIncome = 0;
+    int selectedOutgoing = 0;
+    int year = cal.get(Calendar.YEAR);
+    int month = cal.get(Calendar.MONTH);
+    int day = cal.get(Calendar.DAY_OF_MONTH);
+    DBManager dbManager = new DBManager(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +52,9 @@ public class AddActivity extends AppCompatActivity {
         btnOutgoing = findViewById(R.id.btnOutgoing);
         txtMoneySign = findViewById(R.id.txtMoneySign);
         txtMoneySign.setText("+");
+        btnFinish = findViewById(R.id.btnFinish);
+        btnCancel = findViewById(R.id.btnCancel);
+        txtMoney = findViewById(R.id.txtMoney);
 
         //Data part
         for(int i = 0; i < incomeImageList.length; i++){
@@ -53,6 +70,7 @@ public class AddActivity extends AppCompatActivity {
         incomeAdapter.setOnItemClickListener(new expenseTypeAdapter.OnItemClickListener() {
             @Override
             public void onClick(int pos) {
+                selectedIncome = pos;
                 incomeAdapter.setPosition(pos);
                 incomeAdapter.notifyDataSetChanged();
             }
@@ -60,6 +78,7 @@ public class AddActivity extends AppCompatActivity {
         outgoingAdapter.setOnItemClickListener(new expenseTypeAdapter.OnItemClickListener() {
             @Override
             public void onClick(int pos) {
+                selectedOutgoing = pos;
                 outgoingAdapter.setPosition(pos);
                 outgoingAdapter.notifyDataSetChanged();
             }
@@ -86,6 +105,28 @@ public class AddActivity extends AppCompatActivity {
                 txtMoneySign.setText("+");
                 recyViewIncome.setVisibility(View.VISIBLE);
                 recyViewOutgoing.setVisibility(View.INVISIBLE);
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        btnFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(txtMoney.getText())){
+                    Log.w("Warning", "Please input money amount");
+                }else{
+                    System.out.println(txtMoney.getText());
+                    if(recyViewIncome.getVisibility() == View.VISIBLE){
+                        dbManager.insert(0, incomeImageList[selectedIncome], incomeNameList[selectedIncome], Double.parseDouble(txtMoney.getText().toString()), year, month, day);
+                        finish();
+                    }else{
+                        dbManager.insert(1, outgoingImageList[selectedOutgoing], outgoingNameList[selectedIncome], Double.parseDouble(txtMoney.getText().toString()), year, month, day);
+                    }
+                }
             }
         });
     }
