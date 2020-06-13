@@ -16,10 +16,15 @@ public class dayNetIncomeAdapter extends RecyclerView.Adapter<dayNetIncomeAdapte
 
     private List<dayNetIncome> dayList;
     private Context context;
+    String[] monthName = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Auc", "Sep", "Oct", "Nov", "Dec"};
 
     public dayNetIncomeAdapter(List<dayNetIncome> dayList, Context context){
         this.dayList = dayList;
         this.context = context;
+    }
+
+    public void setDayList(List<dayNetIncome> dayList) {
+        this.dayList = dayList;
     }
 
     public class dayNetIncomeViewHolder extends RecyclerView.ViewHolder{
@@ -54,8 +59,11 @@ public class dayNetIncomeAdapter extends RecyclerView.Adapter<dayNetIncomeAdapte
 
     @Override
     public void onBindViewHolder(@NonNull dayNetIncomeViewHolder holder, final int position){
-        holder.txtDate.setText(dayList.get(position).getDate().toString().substring(4, 10));
-        holder.txtTotal.setText(dayList.get(position).getTotal() + "");
+        if(dayList.get(position).getTotal() > 0){
+            holder.txtTotal.setText("+ " + String.valueOf(dayList.get(position).getTotal()));
+        }
+        holder.txtDate.setText(monthName[dayList.get(position).getMonth()] + "  " + String.valueOf(dayList.get(position).getDay()));
+
         holder.showEntry(dayList.get(position).getEntryList());
     }
 

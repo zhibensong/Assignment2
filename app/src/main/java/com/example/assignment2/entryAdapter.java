@@ -51,9 +51,9 @@ public class entryAdapter extends RecyclerView.Adapter<entryAdapter.entryViewHol
         holder.imageEntry.setImageResource(entryList.get(position).getImage());
         holder.txtType.setText(entryList.get(position).getTypeName());
         if(entryList.get(position).getIO() == 0){
-            holder.txtNumber.setText("+" + entryList.get(position).getNumber() + "");
+            holder.txtNumber.setText("+ " + entryList.get(position).getNumber() + "");
         }else{
-            holder.txtNumber.setText("-" + entryList.get(position).getNumber() + "");
+            holder.txtNumber.setText("- " + entryList.get(position).getNumber() + "");
         }
 
     }

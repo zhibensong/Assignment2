@@ -35,7 +35,7 @@ public class OverviewActivity extends AppCompatActivity {
     String[] monthName = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Auc", "Sep", "Oct", "Nov", "Dec"};
     int year = cal.get(Calendar.YEAR);
     int month = cal.get(Calendar.MONTH) + 1;
-    int day = cal.getActualMaximum(Calendar.MONTH);
+    int day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
     int[] amount;
     String[] label;
     List<PointValue> pointValues = new ArrayList<>();

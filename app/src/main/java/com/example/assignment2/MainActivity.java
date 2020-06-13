@@ -1,5 +1,6 @@
 package com.example.assignment2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,18 +14,13 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     Calendar cal = Calendar.getInstance();
-    List<dayNetIncome> dayList = new ArrayList<>();
-    List<Date> dateList = new ArrayList<>();
-    List<Double> totalList = new ArrayList<>();
-    List<entry> firstDay = new ArrayList<>();
-    List<entry> secondDay = new ArrayList<>();
-    List<List<entry>> entryListList = new ArrayList<>();
+    dayNetIncomeAdapter dayNetIncomeAdapter;
+    List<dayNetIncome> dayList;
     RecyclerView recyViewList;
     Button btnAdd;
     Button btnOver;
@@ -38,37 +34,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        System.out.println(dbManager.queryByDay(year, month, 13));
 
         //Find component
+
         recyViewList = findViewById(R.id.recyViewList);
         btnAdd = findViewById(R.id.btnAddList);
         btnOver = findViewById(R.id.btnOverviewList);
         btnList = findViewById(R.id.btnListList);
 
-        //Data Part
-        dateList.add(new Date());
-        dateList.add(new Date(1591620407));
-        entry fe = new entry(R.drawable.salary, "Salary", 800.0);
-        entry se = new entry(R.drawable.eating, "Eating out", -60.0);
-        entry te = new entry(R.drawable.salary, "Salary", 800.0);
-        entry foe = new entry(R.drawable.education, "Education", -100.0);
-        firstDay.add(fe);
-        firstDay.add(se);
-        secondDay.add(te);
-        secondDay.add(foe);
-        entryListList.add(firstDay);
-        entryListList.add(secondDay);
-        entryListList.add(dbManager.queryByDay(year, month, day));
-        totalList.add(fe.getNumber() + se.getNumber());
-        totalList.add(te.getNumber() + foe.getNumber());
-        for(int i = 0; i < dateList.size(); i++){
-            dayNetIncome day = new dayNetIncome(dateList.get(i), totalList.get(i), entryListList.get(i));
-            dayList.add(day);
-        }
-
         //Fill recycler view
-        dayNetIncomeAdapter dayNetIncomeAdapter = new dayNetIncomeAdapter(dayList, MainActivity.this);
+        setData();
+        dayNetIncomeAdapter = new dayNetIncomeAdapter(dayList, MainActivity.this);
         recyViewList.setAdapter(dayNetIncomeAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyViewList.setLayoutManager(layoutManager);
@@ -79,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(addIntent);
+                startActivityForResult(addIntent, 1);
             }
         });
         final Intent overIntent = new Intent(this, OverviewActivity.class);
@@ -89,5 +65,57 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(overIntent);
             }
         });
+    }
+
+    public void setData(){
+        //Get data in past thirty days
+        dayList = new ArrayList<>();
+        int tempYear = year;
+        int tempMonth = month;
+        int tempDay = day;
+        double total = 0.0;
+        for(int i = 0; i < 30; i++){
+            //if day = 0, go to last month, if month = 0, go to last year's december
+            if (tempDay == 0){
+                if (tempMonth == 0){
+                    tempYear--;
+                    tempMonth = 11;
+                    tempDay = 31;
+                }else{
+                    tempMonth--;
+                    cal.set(Calendar.MONTH, tempMonth);
+                    tempDay = cal.get(Calendar.DAY_OF_MONTH);
+                }
+            }
+            List<entry> entryList = dbManager.queryByDay(tempYear, tempMonth, tempDay);
+            //if no entries, go to the day before
+            if(entryList.size() == 0){
+                tempDay--;
+                continue;
+            }else{
+                //calculate total number of money
+                for(int j = 0; j < entryList.size(); j++){
+                    entry entry = entryList.get(j);
+                    if(entry.getIO() == 0){
+                        total += entry.getNumber();
+                    }else{
+                        total -= entry.getNumber();
+                    }
+                }
+                dayNetIncome day = new dayNetIncome(tempMonth, tempDay, total, entryList);
+                dayList.add(day);
+            }
+            tempDay--;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            setData();
+            dayNetIncomeAdapter.setDayList(dayList);
+            dayNetIncomeAdapter.notifyDataSetChanged();
+        }
     }
 }

@@ -46,23 +46,28 @@ public class DBManager {
                 entries.add(entry);
             }while(cursor.moveToNext());
         }
+        cursor.close();
+        db.close();
         return entries;
     }
 
     public List<entry> queryByDay(int year, int month, int day){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<entry> entries = new ArrayList<>();
-        String querySql = "Select IO, type, number from accounts where year = ? and month = ? and day = ?";
-        Cursor cursor = db.rawQuery(querySql, new String[]{String.valueOf(year), String.valueOf(month), String.valueOf(day)});
+        String querySql = "Select IO, image, type, number from accounts where year = "+ year +" and month = "+ month +" and day = " + day;
+        Cursor cursor = db.rawQuery(querySql, new String[]{});
         if(cursor.moveToFirst()){
             do {
                 entry entry = new entry();
-                entry.setImage(cursor.getInt(cursor.getColumnIndex("IO")));
+                entry.setIO(cursor.getInt(cursor.getColumnIndex("IO")));
+                entry.setImage(cursor.getInt(cursor.getColumnIndex("image")));
                 entry.setTypeName(cursor.getString(cursor.getColumnIndex("type")));
                 entry.setNumber(cursor.getDouble(cursor.getColumnIndex("number")));
                 entries.add(entry);
             }while(cursor.moveToNext());
         }
+        cursor.close();
+        db.close();
         return entries;
     }
 }

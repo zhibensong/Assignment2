@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -110,6 +111,7 @@ public class AddActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setResult(RESULT_CANCELED);
                 finish();
             }
         });
@@ -119,13 +121,13 @@ public class AddActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(txtMoney.getText())){
                     Log.w("Warning", "Please input money amount");
                 }else{
-                    System.out.println(txtMoney.getText());
                     if(recyViewIncome.getVisibility() == View.VISIBLE){
                         dbManager.insert(0, incomeImageList[selectedIncome], incomeNameList[selectedIncome], Double.parseDouble(txtMoney.getText().toString()), year, month, day);
-                        finish();
                     }else{
                         dbManager.insert(1, outgoingImageList[selectedOutgoing], outgoingNameList[selectedIncome], Double.parseDouble(txtMoney.getText().toString()), year, month, day);
                     }
+                    setResult(RESULT_OK);
+                    finish();
                 }
             }
         });

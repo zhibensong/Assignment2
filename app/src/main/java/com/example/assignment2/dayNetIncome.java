@@ -4,21 +4,31 @@ import java.util.Date;
 import java.util.List;
 
 public class dayNetIncome {
-    private Date date;
+    private int month;
+    private int day;
     private Double total;
     private List<entry> entryList;
-    public dayNetIncome(Date date, Double total, List<entry> entryList){
-        this.date = date;
+    public dayNetIncome(int month, int day, Double total, List<entry> entryList){
+        this.month = month;
+        this.day = day;
         this.total = total;
         this.entryList = entryList;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setMonth(int month) {
+        this.month = month;
     }
 
-    public Date getDate() {
-        return date;
+    public int getMonth() {
+        return month;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getDay() {
+        return day;
     }
 
     public void setTotal(Double total) {
