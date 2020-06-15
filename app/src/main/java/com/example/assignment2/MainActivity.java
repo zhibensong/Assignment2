@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Find component
-
         recyViewList = findViewById(R.id.recyViewList);
         btnAdd = findViewById(R.id.btnAddList);
         btnOver = findViewById(R.id.btnOverviewList);

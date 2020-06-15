@@ -22,10 +22,10 @@ public class AddActivity extends AppCompatActivity {
 
     Calendar cal = Calendar.getInstance();
     Integer[] incomeImageList = {R.drawable.salary, R.drawable.investment, R.drawable.parttime, R.drawable.borrow, R.drawable.selling, R.drawable.gift, R.drawable.other};
-    String[] incomeNameList = {"Salary", "Investment income", "Internship", "Borrow", "Selling", "Gift", "Other"};
+    String[] incomeNameList = {"Salary", "Investment income", "Internship", "Borrow", "Selling", "Gift", "Other in"};
     List<expenseType> incomeList = new ArrayList<expenseType>();
     Integer[] outgoingImageList = {R.drawable.eating, R.drawable.grocery, R.drawable.utilities, R.drawable.shopping, R.drawable.tax, R.drawable.travel, R.drawable.transport, R.drawable.business, R.drawable.education, R.drawable.health, R.drawable.entertainment, R.drawable.gift, R.drawable.borrow, R.drawable.other};
-    String[] outgoingNameList = {"Eating out", "Groceries", "Utilities", "Shopping", "Tax", "Travel", "Transport", "Business", "Education", "Health", "Game", "Gift", "Pay back", "Other"};
+    String[] outgoingNameList = {"Eating out", "Groceries", "Utilities", "Shopping", "Tax", "Travel", "Transport", "Business", "Education", "Health", "Game", "Gift", "Pay back", "Other out"};
     List<expenseType> outgoingList = new ArrayList<expenseType>();
     RecyclerView recyViewIncome;
     RecyclerView recyViewOutgoing;
@@ -124,7 +124,7 @@ public class AddActivity extends AppCompatActivity {
                     if(recyViewIncome.getVisibility() == View.VISIBLE){
                         dbManager.insert(0, incomeImageList[selectedIncome], incomeNameList[selectedIncome], Double.parseDouble(txtMoney.getText().toString()), year, month, day);
                     }else{
-                        dbManager.insert(1, outgoingImageList[selectedOutgoing], outgoingNameList[selectedIncome], Double.parseDouble(txtMoney.getText().toString()), year, month, day);
+                        dbManager.insert(1, outgoingImageList[selectedOutgoing], outgoingNameList[selectedOutgoing], Double.parseDouble(txtMoney.getText().toString()), year, month, day);
                     }
                     setResult(RESULT_OK);
                     finish();

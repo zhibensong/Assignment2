@@ -1,5 +1,6 @@
 package com.example.assignment2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,17 +28,20 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 public class OverviewActivity extends AppCompatActivity {
 
+    Integer[] incomeImageList = {R.drawable.salary, R.drawable.investment, R.drawable.parttime, R.drawable.borrow, R.drawable.selling, R.drawable.gift, R.drawable.other};
+    String[] incomeNameList = {"Salary", "Investment income", "Internship", "Borrow", "Selling", "Gift", "Other in"};
+    Integer[] outgoingImageList = {R.drawable.eating, R.drawable.grocery, R.drawable.utilities, R.drawable.shopping, R.drawable.tax, R.drawable.travel, R.drawable.transport, R.drawable.business, R.drawable.education, R.drawable.health, R.drawable.entertainment, R.drawable.gift, R.drawable.borrow, R.drawable.other};
+    String[] outgoingNameList = {"Eating out", "Groceries", "Utilities", "Shopping", "Tax", "Travel", "Transport", "Business", "Education", "Health", "Game", "Gift", "Pay back", "Other out"};
     List<entry> entryList = new ArrayList<>();
-    List<Integer> imageList = new ArrayList<>();
-    List<String> nameList = new ArrayList<>();
-    List<Double> numberList = new ArrayList<>();
     Calendar cal = Calendar.getInstance();
+    DBManager dbManager = new DBManager(this);
     String[] monthName = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Auc", "Sep", "Oct", "Nov", "Dec"};
     int year = cal.get(Calendar.YEAR);
-    int month = cal.get(Calendar.MONTH) + 1;
-    int day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-    int[] amount;
+    int month = cal.get(Calendar.MONTH);
+    int maxDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+    double[] amount;
     String[] label;
+    entryAdapter entryAdapter;
     List<PointValue> pointValues = new ArrayList<>();
     List<AxisValue> axisValues = new ArrayList<>();
     LineChartView lineChart;
@@ -59,26 +63,15 @@ public class OverviewActivity extends AppCompatActivity {
         lineChart = findViewById(R.id.lineChart);
         recyViewList = findViewById(R.id.recyViewList);
         overviewTitle = findViewById(R.id.overviewTitle);
-        overviewTitle.setText("Overview(" + monthName[month - 1] + ")");
-
-        //Data Part
-        imageList.add(R.drawable.salary);
-        imageList.add(R.drawable.eating);
-        nameList.add("Salary");
-        nameList.add("Eating out");
-        numberList.add(1500.0);
-        numberList.add(200.0);
-        for(int i = 0; i < imageList.size(); i++){
-            entry temp = new entry(imageList.get(i), nameList.get(i), numberList.get(i));
-            entryList.add(temp);
-        }
+        overviewTitle.setText("Overview(" + monthName[month] + ")");
 
         //Draw line chart
-        setData();
+        setChartData();
         initChart();
 
         //Fill recycler view
-        entryAdapter entryAdapter = new entryAdapter(OverviewActivity.this);
+        setListData();
+        entryAdapter = new entryAdapter(OverviewActivity.this);
         entryAdapter.setEntry(entryList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyViewList.setAdapter(entryAdapter);
@@ -96,48 +89,66 @@ public class OverviewActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(addIntent);
+                startActivityForResult(addIntent, 1);
             }
         });
     }
 
-    public int getMonthDay(int year, int month){
-        if(month == 2){
-            if(year % 4 != 0){
-                return 28;
-            }else if(year % 100 == 0 && year % 400 != 0){
-                return 28;
-            }else{
-                return 29;
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            setListData();
+            setChartData();
+            initChart();
+            entryAdapter.setEntry(entryList);
+            entryAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void setListData(){
+        for (int i = 0; i < incomeNameList.length; i++){
+            List<entry> entryIncome = dbManager.queryByType(0, incomeNameList[i], year, month);
+            double temp = 0;
+            if(entryIncome.size() > 0){
+                for(int j = 0; j < entryIncome.size(); j++){
+                    temp += entryIncome.get(j).getNumber();
+                }
+                entry entry = new entry(incomeImageList[i], incomeNameList[i], temp);
+                entry.setIO(0);
+                entryList.add(entry);
             }
-        }else if (month <= 7){
-            if (month % 2 == 0){
-                return 30;
-            }else{
-                return 31;
+        }
+        for(int i = 0; i < outgoingNameList.length; i++){
+            List<entry> entryOutgoing = dbManager.queryByType(1, outgoingNameList[i], year, month);
+            double temp = 0;
+            if(entryOutgoing.size() > 0){
+                for(int j = 0; j < entryOutgoing.size(); j++){
+                    temp += entryOutgoing.get(j).getNumber();
+                }
+                entry entry = new entry(outgoingImageList[i], outgoingNameList[i], temp);
+                entry.setIO(1);
+                entryList.add(entry);
             }
-        }else if(month % 2 == 0){
-            return 31;
-        }else{
-            return 30;
         }
     }
 
     //Set line chart data
-    public void setData(){
-        amount = new int[day];
-        label = new String[day];
-        for(int i = 0; i < day; i++){
-            amount[i] = 0;
-            label[i] = String.valueOf(i + 1);
+    public void setChartData(){
+        amount = new double[maxDay];
+        label = new String[maxDay];
+        for(int i = 1; i < maxDay + 1; i++){
+            List<entry> entries = dbManager.queryOutgoing(year, month, i);
+            double temp = 0;
+            for(int j = 0; j < entries.size(); j++){
+                temp += entries.get(j).getNumber();
+            }
+            amount[i - 1] = temp;
+            label[i - 1] = String.valueOf(i);
         }
-        amount[9] = 300;
-        amount[19] = 600;
-        amount[29] = 900;
-        for(int i = 0; i < day; i++){
-            pointValues.add(new PointValue(i, amount[i]));
+        for(int i = 0; i < maxDay; i++){
+            pointValues.add(new PointValue(i, (float)amount[i]));
             axisValues.add(new AxisValue(i).setLabel(label[i]));
-            System.out.println(axisValues.get(i));
         }
     }
 
@@ -159,7 +170,7 @@ public class OverviewActivity extends AppCompatActivity {
         Axis axisX = new Axis();
         axisX.setHasTiltedLabels(false);
         axisX.setTextColor(Color.BLACK);
-        axisX.setName(monthName[month - 1]);
+        axisX.setName(monthName[month]);
         axisX.setTextSize(13);
         axisX.setValues(axisValues);
         axisX.setHasLines(true);

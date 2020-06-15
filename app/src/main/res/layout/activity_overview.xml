@@ -27,35 +27,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/overviewTitle" />
 
-    <lecho.lib.hellocharts.view.LineChartView
-        android:id="@+id/lineChart"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:layout_constraintBottom_toTopOf="@+id/midLine"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topLine">
-
-    </lecho.lib.hellocharts.view.LineChartView>
-
-    <View
-        android:id="@+id/midLine"
-        android:layout_width="fill_parent"
-        android:layout_height="3dp"
-        android:background="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lineChart" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyViewList"
-        android:layout_width="409dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/midLine"
-        app:layout_constraintVertical_bias="1.0" />
-
     <View
         android:id="@+id/buttonLine"
         android:layout_width="fill_parent"
@@ -93,5 +64,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnAddOver"
         app:layout_constraintTop_toBottomOf="@+id/buttonLine" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/buttonLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topLine">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <lecho.lib.hellocharts.view.LineChartView
+                android:id="@+id/lineChart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp">
+
+            </lecho.lib.hellocharts.view.LineChartView>
+
+            <View
+                android:id="@+id/midLine"
+                android:layout_width="fill_parent"
+                android:layout_height="3dp"
+                android:background="@android:color/background_dark" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyViewList"
+                android:layout_width="409dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
