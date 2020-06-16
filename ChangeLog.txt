@@ -1,0 +1,23 @@
+2020-06-16 Finish the project
+
+2020-06-14&15 Rewrite the data part in overview activity by call functions, queryOutgoing and queryByType,  in DBManager, fill the line chart with spending records by day in database, fill the recyclerview with the sum of each record type, override onActivityResult function to get result from add activity, refresh the data if add activity return OK. Put the chart part and recyclerview in to a scroll view to improve the layout(which means this two view can be scrolled together)
+
+2020-06-13 Check the database with device monitor and SQLiteExpertPers, shows the data has inserted correctly, rewrite the data part in list activity by call function, queryByDay, in DBManager, get records in the past 30 days and list them by day in the recyclerview, 
+
+2020-06-12 Add two classes called DBHelper and DBManager, use DBHelper to access the SQLite database called assignment2.db, create four functions in DBManager, insert, queryByDay, queryOutgoing and queryByType, to operate the database. Rewrite onClick function for the finish button in add activity to insert data to database by call function, insert, in DBManager. HAVE NOT tested the database in device to see if the data have inserted.
+
+2020-06-11 Draw a line chart by using the hellochart.jar with test data, slightly changed the layout of the whole app to give the content more room.
+
+2020-06-10 Solve a problem in add activity which can lead to a nullpointer exception when click one item in recycleriew after scrolling the previous selected item to invisible.  Use entry and entryAdapter classes to fill the recyclerview in overview activity with test data.
+
+2020-06-09 Create two new java classes, expenseType and expenseTypeAdapter, to fill the two recyclerview in add activity with two sets of accounting type. Select appropriate image as accounting types' icon in WWW.iconfont.cn.  Develop functions in expenseTypeAdapter to change the items' background color when click them.
+
+2020-06-08 Create four new java classes, dayNetIncome, dayNetIncomeAdapter, entry and entryAdapter, to fill the nested recyclerview in main activity with test data. 
+
+2020-06-07 Develop the interface of overview activity in XML file. 
+ 
+2020-06-06 Develop the interface of add activity in XML file, create a new XML file to fill the recyclerview.
+
+2020-06-05 Develop the interface of list activity in XML file, create two new XML files to fill the recyclerview.
+
+2020-06-04 Initialize project in github.

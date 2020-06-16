@@ -23,10 +23,10 @@ public class AddActivity extends AppCompatActivity {
     Calendar cal = Calendar.getInstance();
     Integer[] incomeImageList = {R.drawable.salary, R.drawable.investment, R.drawable.parttime, R.drawable.borrow, R.drawable.selling, R.drawable.gift, R.drawable.other};
     String[] incomeNameList = {"Salary", "Investment income", "Internship", "Borrow", "Selling", "Gift", "Other in"};
-    List<expenseType> incomeList = new ArrayList<expenseType>();
+    List<expenseType> incomeList = new ArrayList<>();
     Integer[] outgoingImageList = {R.drawable.eating, R.drawable.grocery, R.drawable.utilities, R.drawable.shopping, R.drawable.tax, R.drawable.travel, R.drawable.transport, R.drawable.business, R.drawable.education, R.drawable.health, R.drawable.entertainment, R.drawable.gift, R.drawable.borrow, R.drawable.other};
     String[] outgoingNameList = {"Eating out", "Groceries", "Utilities", "Shopping", "Tax", "Travel", "Transport", "Business", "Education", "Health", "Game", "Gift", "Pay back", "Other out"};
-    List<expenseType> outgoingList = new ArrayList<expenseType>();
+    List<expenseType> outgoingList = new ArrayList<>();
     RecyclerView recyViewIncome;
     RecyclerView recyViewOutgoing;
     TextView txtMoneySign;
